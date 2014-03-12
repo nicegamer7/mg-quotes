@@ -24,8 +24,7 @@ add_action('init', 'mg_qt_register_taxonomies');
 
 add_action('wp_insert_post_data', 'mg_qt_quote_title', 10, 2);
 
-//add_filter('edit_form_after_editor', 'mg_qt_render_title');
-// Metabox
+// Metaboxes
 add_action('add_meta_boxes_mg_qt_quote', 'mg_qp_add_register_meta_boxes');
 add_action('save_post_mg_qt_quote', 'mg_qt_save_meta_box');
 // CPT list table customization
@@ -119,56 +118,6 @@ function mg_qp_add_register_meta_boxes() {
 		'Quote Title',
 		'mg_qt_render_title_meta_box'
 	);
-}
-
-function mg_qt_render_title($post) {
-	global $post_type_object, $post_type;
-	
-	if ($post_type !== 'mg_qt_quote')
-		return;
-	
-	?>
-	<div id="titlediv">
-<div id="titlewrap">
-	<?php
-	/**
-	 * Filter the title field placeholder text.
-	 *
-	 * @since 3.1.0
-	 *
-	 * @param string  $text Placeholder text. Default 'Enter title here'.
-	 * @param WP_Post $post Post object.
-	 */
-	?>
-	<label class="screen-reader-text" id="title-prompt-text" for="title"><?php echo apply_filters( 'enter_title_here', __( 'Enter title here' ), $post ); ?></label>
-	<input type="text" name="post_title" size="30" value="<?php echo esc_attr( htmlspecialchars( $post->post_title ) ); ?>" id="title" autocomplete="off" />
-</div>
-<div class="inside">
-<?php
-$sample_permalink_html = $post_type_object->public ? get_sample_permalink_html($post->ID) : '';
-$shortlink = wp_get_shortlink($post->ID, 'post');
-$permalink = get_permalink( $post->ID );
-if ( !empty( $shortlink ) && $shortlink !== $permalink && $permalink !== home_url('?page_id=' . $post->ID) )
-    $sample_permalink_html .= '<input id="shortlink" type="hidden" value="' . esc_attr($shortlink) . '" /><a href="#" class="button button-small" onclick="prompt(&#39;URL:&#39;, jQuery(\'#shortlink\').val()); return false;">' . __('Get Shortlink') . '</a>';
-
-if ( $post_type_object->public && ! ( 'pending' == get_post_status( $post ) && !current_user_can( $post_type_object->cap->publish_posts ) ) ) {
-	$has_sample_permalink = $sample_permalink_html && 'auto-draft' != $post->post_status;
-?>
-	<div id="edit-slug-box" class="hide-if-no-js">
-	<?php
-		if ( $has_sample_permalink )
-			echo $sample_permalink_html;
-	?>
-	</div>
-<?php
-}
-?>
-</div>
-<?php
-wp_nonce_field( 'samplepermalink', 'samplepermalinknonce', false );
-?>
-</div><!-- /titlediv -->
-	<?php
 }
 
 function mg_qt_render_attribution_meta_box($post) {
