@@ -2,9 +2,9 @@
 
 <blockquote class="mg_qt_quote">
 	<?php echo $mg_qt['quote']; ?>
-	<footer>
-		<?php if (!empty($mg_qt['quote'])): ?>
+	<?php if (!empty($mg_qt['author'])): ?>
+		<footer>
 			<cite class="author"><?php echo $mg_qt['author']; ?></cite>
-		<?php endif; ?>
-	</footer>
+		</footer>
+	<?php endif; ?>
 </blockquote>
