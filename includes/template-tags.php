@@ -22,7 +22,10 @@ function mg_qt_quote($id) {
 	$mg_qt_template_loader->get_template_part('quote');
 }
 
-function mg_qt_random() {
+/*
+ * Pick one random quote
+ */
+function mg_qt_get_random_quote() {
 	global $mg_qt_template_loader, $mg_qt;
 	
 	$mg_qt = array();
@@ -43,6 +46,10 @@ function mg_qt_random() {
 	wp_reset_postdata();
 	
 	$mg_qt_template_loader->get_template_part('quote');
+}
+
+function mg_qt_random_quote() {
+	echo mg_qt_get_random_quote();
 }
 			
 //mg_qt_random_category(/* cat slug or/and name? */);

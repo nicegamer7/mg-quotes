@@ -293,4 +293,4 @@ function mg_qt_category_dropdown() {
 	));
 }
 
-require_once 'includes/template_tags.php';
+require_once 'includes/template-tags.php';
