@@ -35,18 +35,17 @@ add_action('restrict_manage_posts', 'mg_qt_category_dropdown');
 
 function mg_qt_setup_post_type() {
 	$labels =  array(
-		'name' 				=> 'Quote',
-		'singular_name' 	=> 'Quote',
+		'name' 				=> __('Quotes', 'mg_qt'),
+		'singular_name' 	=> __('Quote', 'mg_qt'),
 		'add_new' 			=> __( 'Add New', 'mg_qt' ),
 		'add_new_item' 		=> __( 'Add New Quote', 'mg_qt' ),
-		'edit_item' 		=> __( 'Edit Quotes', 'mg_qt' ),
-		'new_item' 			=> __( 'New Quotes', 'mg_qt' ),
+		'edit_item' 		=> __( 'Edit Quote', 'mg_qt' ),
+		'new_item' 			=> __( 'New Quote', 'mg_qt' ),
 		'all_items' 		=> __( 'All Quotes', 'mg_qt' ),
 		'view_item' 		=> __( 'View Quote', 'mg_qt' ),
 		'search_items' 		=> __( 'Search Quotes', 'mg_qt' ),
 		'not_found' 		=> __( 'No Quotes found', 'mg_qt' ),
 		'not_found_in_trash'=> __( 'No Quotes found in Trash', 'mg_qt' ),
-		'parent_item_colon' => '',
 		'menu_name' 		=> __( 'Quotes', 'mg_qt' )
 	);
 	
