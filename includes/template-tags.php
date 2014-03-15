@@ -15,12 +15,11 @@ function mg_qt_get_random_quote() {
  * Get a quote by its ID.
  */
 function mg_qt_get_quote_by_id($id) {
-	// check $id
-	
-	return mg_qt_get_quote(array(
-		'post_type' => 'mg_qt_quote',
-		'p' => $id
-	));
+	return !is_int($id) || $id === 0 ? '' :  
+		mg_qt_get_quote(array(
+			'post_type' => 'mg_qt_quote',
+			'p' => $id
+		));
 }
 
 /*
@@ -30,19 +29,20 @@ function mg_qt_get_quote_by_id($id) {
  */
 function mg_qt_get_random_quote_from_category_name($cat_name) {
 	$term = get_term_by('name', $cat_name, 'mg_qt_category');
-	// check if found
 	
-	return mg_qt_get_random_quote_from_category_slug($term->slug); // get_term_field()
+	return $term === false ? '' :  
+		mg_qt_get_random_quote_from_category_slug($term->slug); // get_term_field()
 }
  
 function mg_qt_get_random_quote_from_category_id($cat_id) {
 	$term = get_term($cat_id, 'mg_qt_category');
-	// check if found
-	return mg_qt_get_random_quote_from_category_slug($term->slug); // get_term_field()
+	
+	return $term === null || is_wp_error($term) ? '' :  
+		mg_qt_get_random_quote_from_category_slug($term->slug); // get_term_field()
 }
 
 function mg_qt_get_random_quote_from_category_slug($cat_slug) {
-	return mg_qt_get_quote(array(
+	return  mg_qt_get_quote(array(
 		'post_type' => 'mg_qt_quote',
 		'orderby' => 'rand',
 		'posts_per_page' => 1,
@@ -73,7 +73,7 @@ function mg_qt_get_quote($query) {
 	$q = new WP_Query($query);
 	
 	if (!$q->have_posts())
-		return;
+		return '';
 		
 	$q->the_post();
 	
