@@ -78,7 +78,12 @@ function mg_qt_get_quote($query) {
 	$q->the_post();
 	
 	$mg_qt['quote'] = get_the_content();
-	$mg_qt['author'] = get_post_meta(get_the_ID(), 'mg_qt_author', true);
+	$post_id = get_the_ID();
+	$mg_qt['author'] = get_post_meta($post_id, 'mg_qt_author', true);
+	$mg_qt['mg_qt_where'] = get_post_meta($post_id, 'mg_qt_where', true);
+	$mg_qt['mg_qt_url'] = get_post_meta($post_id, 'mg_qt_url', true);
+	$mg_qt['mg_qt_when'] = get_post_meta($post_id, 'mg_qt_when', true);
+	$mg_qt['mg_qt_notes'] = get_post_meta($post_id, 'mg_qt_notes', true);
 	
 	wp_reset_postdata();
 	
