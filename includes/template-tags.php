@@ -49,6 +49,19 @@ function mg_qt_get_random_quote_from_category_slug($cat_slug) {
 		'mg_qt_category' => $cat_slug
 	));
 }
+
+/*
+ * Get a random quote from an author
+ */
+function mg_qt_get_random_quote_from_author($author) {
+	return  mg_qt_get_quote(array(
+		'post_type' => 'mg_qt_quote',
+		'meta_key' => 'mg_qt_author',
+		'meta_value' => $author,
+		'orderby' => 'rand',
+		'posts_per_page' => 1
+	));
+}
  
 /*
  * echoing template tags
