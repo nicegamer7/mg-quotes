@@ -71,7 +71,7 @@ function mg_qt_save_meta_box($post_id) {
 	$quote_info = $_POST['quote_info'];
 	
 	$author = $quote_info['author'];
-	// sanitize
+	$author = trim(preg_replace('/[\r\n\t ]+/', ' ', $author));
 	if (!empty($author))
 			update_post_meta($post_id, 'mg_qt_author', $author);
 	else
