@@ -161,6 +161,6 @@ function mg_qt_category_dropdown() {
 	));
 }
 
-require_once 'includes/template-tags.php';
-require_once 'includes/shortcodes.php';
-require_once 'includes/widgets.php';
+require_once MG_QT_PLUGIN_DIR_PATH . 'includes/template-tags.php';
+require_once MG_QT_PLUGIN_DIR_PATH . 'includes/shortcodes.php';
+require_once MG_QT_PLUGIN_DIR_PATH . 'includes/widgets.php';
