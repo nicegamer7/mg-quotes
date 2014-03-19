@@ -71,14 +71,30 @@ function mg_qt_get_random_quote_from_author($author) {
 function mg_qt_random_quote() {
 	echo mg_qt_get_random_quote();
 }
-/*
+
 function mg_qt_quote($id) {
 	echo mg_qt_get_quote($id);
 }
  
-function mg_qt_random_category($cat) {
-	echo mg_qt_get_random_category($cat);
-} */
+function mg_qt_random_quote_from_category_id($id) {
+	echo mg_qt_get_random_quote_from_category_id($id);
+}
+
+function mg_qt_random_quote_from_category_name($name) {
+	echo mg_qt_get_random_quote_from_category_name($name);
+}
+
+function mg_qt_random_quote_from_category_slug($slug) {
+	echo mg_qt_get_random_quote_from_category_slug($slug);
+}
+
+function mg_qt_random_quote_from_author($author) {
+	echo mg_qt_get_random_quote_from_author($author);
+}
+
+/*
+ *
+ */
 
 function mg_qt_get_quote($query) {
 	global $mg_qt_template_loader, $mg_qt;
