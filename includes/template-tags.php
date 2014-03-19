@@ -68,10 +68,10 @@ function mg_qt_get_random_quote_from_author($author) {
  *
  */
  
-/* function mg_qt_random_quote() {
+function mg_qt_random_quote() {
 	echo mg_qt_get_random_quote();
 }
-
+/*
 function mg_qt_quote($id) {
 	echo mg_qt_get_quote($id);
 }
