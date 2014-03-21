@@ -92,7 +92,7 @@ function mg_qt_setup_post_type() {
 function mg_qt_register_taxonomies() {
 	register_taxonomy('mg_qt_category', 'mg_qt_quote', array(
 		'query_var' => true,
-		'label' => __('Category', 'mg_qt'),
+		'label' => __('Quote Categories', 'mg_qt'),
 		'rewrite' => array('slug' => __('Category', 'mg_qt')),
 		'hierarchical' => true
 		//'show_admin_column' => true
