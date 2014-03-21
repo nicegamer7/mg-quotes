@@ -104,15 +104,22 @@ class mg_qt_Random_Quote_From_Category extends WP_Widget {
 		$instance = wp_parse_args((array)$instance, $this->factory_settings);
 		
 		$title = esc_attr($instance['title']);
-		
 		$category = $instance['category'];
-		if ($category === 0)
-			$category = '';
-		$category = esc_attr($category);
-
 		?>
 			<p><label for="<?php echo $this->get_field_id('title'); ?>"><?php __('Title:', 'mg_qt'); ?></label> <input class="widefat" id="<?php echo $this->get_field_id('title'); ?>" name="<?php echo $this->get_field_name('title'); ?>" type="text" value="<?php echo $title; ?>" /></p>
-			<p><label for="<?php echo $this->get_field_id('category'); ?>"><?php __('Category:', 'mg_qt'); ?></label> <input type="text" value="<?php echo $category; ?>" name="<?php echo $this->get_field_name('category'); ?>" id="<?php echo $this->get_field_id('category'); ?>" class="widefat" /></p>
+			<p>
+				<label for="<?php echo $this->get_field_id('category'); ?>"><?php __('Category:', 'mg_qt'); ?></label> 
+				<?php
+					wp_dropdown_categories(array(
+						'taxonomy' => 'mg_qt_category',
+						'name' => $this->get_field_name('category'),
+						'selected' => $category,
+						'show_option_all' => __('View all categories', 'mg_qt'),
+						'hierarchical' => 1,
+						'orderby' => 'name'
+					));
+				?>
+			</p>
 		<?php
 	}
 	
