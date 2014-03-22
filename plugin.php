@@ -165,6 +165,25 @@ function mg_qt_get_authors() {
 	return $authors;
 }
 
+function mg_qt_get_quotes() {
+	$quotes = array();
+	
+	$query = new WP_Query(array(
+		'post_type' => 'mg_qt_quote',
+		'post_status' => 'publish',
+		'posts_per_page' => -1
+	));
+	
+	while ($query->have_posts()) {
+		$query->the_post();
+		$quotes[get_the_ID()] = get_the_title();
+	}
+	
+	wp_reset_postdata();
+	
+	return $quotes;
+}
+
 require_once MG_QT_PLUGIN_DIR_PATH . 'includes/template-tags.php';
 require_once MG_QT_PLUGIN_DIR_PATH . 'includes/shortcodes.php';
 require_once MG_QT_PLUGIN_DIR_PATH . 'includes/widgets.php';

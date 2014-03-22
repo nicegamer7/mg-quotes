@@ -218,8 +218,97 @@ class mg_qt_Random_Quote_From_Author extends WP_Widget {
 
 }
 
+class mg_qt_Single_Quote extends WP_Widget {
+
+	private $factory_settings = array(
+		'title' => '', 
+		'quote' => 0
+	);
+
+	public function __construct() {
+		parent::__construct(
+			'mg_qt_widget_single_quote',
+			__('Single Quote', 'mg_qt'),
+			array(
+				'description' => __('Pick a single quote', 'mg_qt'),
+				'classname' => 'mg_qt_widget_single_quote'
+			) 
+		);
+	}
+	
+	public function widget($args, $instance) {
+		$instance = wp_parse_args((array)$instance, $this->factory_settings);
+		
+		if ($instance['quote'] === 0)
+			return;
+			
+		$quote_markup = mg_qt_get_quote_by_id($instance['quote']);
+		if ($quote_markup === '')
+			return;
+		
+		extract($args);
+		
+		$title = apply_filters('widget_title', $instance['title'], $instance, $this->id_base);
+		
+		echo $before_widget;
+		
+		if ($title)
+			echo $before_title . $title . $after_title;
+			
+		echo $quote_markup;
+		
+		echo $after_widget;
+	}
+	
+	public function form($instance) {
+		$instance = wp_parse_args((array)$instance, $this->factory_settings);
+		
+		$title = esc_attr($instance['title']);
+		$current_quote = $instance['quote'];
+		$quotes = mg_qt_get_quotes();
+		
+		$title_field_id = $this->get_field_id('title');
+		$title_field_name = $this->get_field_name('title');
+		$quote_field_id = $this->get_field_id('quote');
+		$quote_field_name = $this->get_field_name('quote');
+		
+		?>
+			<p><label for="<?php echo $title_field_id; ?>"><?php __('Title:', 'mg_qt'); ?></label> <input class="widefat" id="<?php echo $title_field_id; ?>" name="<?php echo $title_field_name; ?>" type="text" value="<?php echo $title; ?>" /></p>
+			<p>
+				<label for="<?php echo $quote_field_id; ?>"><?php __('Author:', 'mg_qt'); ?></label> 
+				<select id="<?php echo $quote_field_id?>" name="<?php echo $quote_field_name; ?>">
+					<option value="0">Select a quote</option>
+					<?php foreach ($quotes as $id => $title): ?>
+						<?php
+						if (strlen($title) > 25)
+							$title = substr($title, 0, 25) . '...';
+						?>
+						<option 
+							value="<?php echo esc_attr($id); ?>"
+							<?php selected($current_quote, $id); ?>
+						>
+							<?php echo esc_html($title); ?>
+						</option>
+					<?php endforeach; ?>
+				</select>
+			</p>
+		<?php
+	}
+	
+	public function update($new_instance, $old_instance) {
+		$instance = $old_instance;
+		
+		$instance['title'] = strip_tags($new_instance['title']);
+		$instance['quote'] = absint($new_instance['quote']);
+		
+		return $instance;
+	}
+
+}
+
 function mg_qt_register_widgets() {
 	register_widget('mg_qt_Random_Quote');
 	register_widget('mg_qt_Random_Quote_From_Category');
 	register_widget('mg_qt_Random_Quote_From_Author');
+	register_widget('mg_qt_Single_Quote');
 }
