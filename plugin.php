@@ -155,6 +155,16 @@ function mg_qt_category_dropdown() {
 	));
 }
 
+function mg_qt_get_authors() {
+	global $wpdb;
+
+	$authors = $wpdb->get_col(
+		"SELECT DISTINCT meta_value FROM $wpdb->postmeta WHERE meta_key = 'mg_qt_author' AND post_id IN (SELECT ID from $wpdb->posts where post_type = 'mg_qt_quote' AND post_status = 'publish') ORDER BY meta_value ASC"
+	);
+	
+	return $authors;
+}
+
 require_once MG_QT_PLUGIN_DIR_PATH . 'includes/template-tags.php';
 require_once MG_QT_PLUGIN_DIR_PATH . 'includes/shortcodes.php';
 require_once MG_QT_PLUGIN_DIR_PATH . 'includes/widgets.php';
