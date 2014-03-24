@@ -36,7 +36,7 @@ class mg_qt_Random_Quote extends WP_Widget {
 		$title = $instance['title'];
 		?>
 			<p>
-				<label for="<?php echo $this->get_field_id('title'); ?>"><?php __('Title:', 'mg_qt'); ?> 
+				<label for="<?php echo $this->get_field_id('title'); ?>"><?php _e('Title:', 'mg_qt'); ?> 
 					<input 
 						id="<?php echo $this->get_field_id('title'); ?>" 
 						name="<?php echo $this->get_field_name('title'); ?>" 
@@ -106,9 +106,9 @@ class mg_qt_Random_Quote_From_Category extends WP_Widget {
 		$title = esc_attr($instance['title']);
 		$category = $instance['category'];
 		?>
-			<p><label for="<?php echo $this->get_field_id('title'); ?>"><?php __('Title:', 'mg_qt'); ?></label> <input class="widefat" id="<?php echo $this->get_field_id('title'); ?>" name="<?php echo $this->get_field_name('title'); ?>" type="text" value="<?php echo $title; ?>" /></p>
+			<p><label for="<?php echo $this->get_field_id('title'); ?>"><?php _e('Title:', 'mg_qt'); ?></label> <input class="widefat" id="<?php echo $this->get_field_id('title'); ?>" name="<?php echo $this->get_field_name('title'); ?>" type="text" value="<?php echo $title; ?>" /></p>
 			<p>
-				<label for="<?php echo $this->get_field_id('category'); ?>"><?php __('Category:', 'mg_qt'); ?></label> 
+				<label for="<?php echo $this->get_field_id('category'); ?>"><?php _e('Category:', 'mg_qt'); ?></label> 
 				<?php
 					wp_dropdown_categories(array(
 						'taxonomy' => 'mg_qt_category',
@@ -189,9 +189,9 @@ class mg_qt_Random_Quote_From_Author extends WP_Widget {
 		$author_field_name = $this->get_field_name('author');
 		
 		?>
-			<p><label for="<?php echo $title_field_id; ?>"><?php __('Title:', 'mg_qt'); ?></label> <input class="widefat" id="<?php echo $title_field_id; ?>" name="<?php echo $title_field_name; ?>" type="text" value="<?php echo $title; ?>" /></p>
+			<p><label for="<?php echo $title_field_id; ?>"><?php _e('Title:', 'mg_qt'); ?></label> <input class="widefat" id="<?php echo $title_field_id; ?>" name="<?php echo $title_field_name; ?>" type="text" value="<?php echo $title; ?>" /></p>
 			<p>
-				<label for="<?php echo $author_field_id; ?>"><?php __('Author:', 'mg_qt'); ?></label> 
+				<label for="<?php echo $author_field_id; ?>"><?php _e('Author:', 'mg_qt'); ?></label> 
 				<select id="<?php echo $author_field_id?>" name="<?php echo $author_field_name; ?>">
 					<option value="">Select an author</option>
 					<?php foreach ($authors as $author): ?>
@@ -273,9 +273,9 @@ class mg_qt_Single_Quote extends WP_Widget {
 		$quote_field_name = $this->get_field_name('quote');
 		
 		?>
-			<p><label for="<?php echo $title_field_id; ?>"><?php __('Title:', 'mg_qt'); ?></label> <input class="widefat" id="<?php echo $title_field_id; ?>" name="<?php echo $title_field_name; ?>" type="text" value="<?php echo $title; ?>" /></p>
+			<p><label for="<?php echo $title_field_id; ?>"><?php _e('Title:', 'mg_qt'); ?></label> <input class="widefat" id="<?php echo $title_field_id; ?>" name="<?php echo $title_field_name; ?>" type="text" value="<?php echo $title; ?>" /></p>
 			<p>
-				<label for="<?php echo $quote_field_id; ?>"><?php __('Author:', 'mg_qt'); ?></label> 
+				<label for="<?php echo $quote_field_id; ?>"><?php _e('Author:', 'mg_qt'); ?></label> 
 				<select id="<?php echo $quote_field_id?>" name="<?php echo $quote_field_name; ?>">
 					<option value="0">Select a quote</option>
 					<?php foreach ($quotes as $id => $title): ?>
