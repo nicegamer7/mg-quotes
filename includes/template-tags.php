@@ -107,6 +107,9 @@ function mg_qt_get_quote($query) {
 	$q->the_post();
 	
 	$mg_qt['quote'] = get_the_content();
+	$mg_qt['quote'] = apply_filters('the_content', $mg_qt['quote']);
+	$mg_qt['quote'] = str_replace(']]>', ']]&gt;', $mg_qt['quote']);
+	
 	$post_id = get_the_ID();
 	$mg_qt['author'] = get_post_meta($post_id, 'mg_qt_author', true);
 	$mg_qt['mg_qt_where'] = get_post_meta($post_id, 'mg_qt_where', true);
