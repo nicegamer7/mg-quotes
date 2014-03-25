@@ -117,7 +117,10 @@ function mg_qt_get_quote($query) {
 	wp_reset_postdata();
 	
 	ob_start();
-	$mg_qt_template_loader->get_template_part('quote');
+		require_once MG_QT_INCLUDES . 'class-gamajo-template-loader.php';
+		require_once MG_QT_INCLUDES . 'class-mg-qt-template-loader.php';
+		$mg_qt_template_loader = new mg_qt_Template_Loader();
+		$mg_qt_template_loader->get_template_part('quote');
 	$html = ob_get_clean();
 	
 	return apply_filters('mg_qt_quote_markup', $html, $mg_qt);
