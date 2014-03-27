@@ -201,8 +201,10 @@ class mg_qt_Random_Quote_From_Author extends WP_Widget {
 		$instance = wp_parse_args((array)$instance, $this->factory_settings);
 		
 		$title = esc_attr($instance['title']);
-		$current_author = $instance['author'];
 		$authors = mg_qt_get_authors();
+		$quote_author = $instance['author'];
+		if ($quote_author !== '' && !in_array($quote_author, $authors))
+			$quote_author = '';
 		
 		$title_field_id = $this->get_field_id('title');
 		$title_field_name = $this->get_field_name('title');
@@ -223,11 +225,11 @@ class mg_qt_Random_Quote_From_Author extends WP_Widget {
 			<p>
 				<label for="<?php echo $author_field_id; ?>"><?php _e('Author:', 'mg_qt'); ?></label> 
 				<select id="<?php echo $author_field_id?>" name="<?php echo $author_field_name; ?>" class="widefat">
-					<option value="">Select an author</option>
+					<option value=""<?php selected($quote_author, ''); ?>>Select an author</option>
 					<?php foreach ($authors as $author): ?>
 						<option 
 							value="<?php echo esc_attr($author); ?>"
-							<?php selected($current_author, $author); ?>
+							<?php selected($quote_author, $author); ?>
 						>
 							<?php echo esc_html($author); ?>
 						</option>
