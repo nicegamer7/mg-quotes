@@ -46,7 +46,7 @@ class mg_qt_Random_Quote extends WP_Widget {
 						'taxonomy' => 'mg_qt_category',
 						'name' => $this->get_field_name('category'),
 						'selected' => $category,
-						'show_option_all' => __('View all categories', 'mg_qt'),
+						'show_option_all' => __('From all categories', 'mg_qt'),
 						'hierarchical' => 1,
 						'orderby' => 'name',
 						'class' => 'widefat'
