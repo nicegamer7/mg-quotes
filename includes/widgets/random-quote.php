@@ -24,7 +24,9 @@ class mg_qt_Random_Quote extends WP_Widget {
 		$title = esc_attr($instance['title']);
 		
 		$category = $instance['category'];
-		if ($category !== 0 && term_exists($category, 'mg_qt_category') === 0)
+		if (wp_count_terms('mg_qt_category') === 0)
+			$category = -1;
+		else if ($category > 0 && term_exists($category, 'mg_qt_category') === 0)
 			$category = 0;
 			
 		?>
@@ -47,6 +49,7 @@ class mg_qt_Random_Quote extends WP_Widget {
 						'name' => $this->get_field_name('category'),
 						'selected' => $category,
 						'show_option_all' => __('From all categories', 'mg_qt'),
+						'show_option_none' => __('From all categories', 'mg_qt'),
 						'hierarchical' => 1,
 						'orderby' => 'name',
 						'class' => 'widefat'
