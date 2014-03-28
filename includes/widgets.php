@@ -114,6 +114,8 @@ class mg_qt_Random_Quote_From_Category extends WP_Widget {
 		
 		$title = esc_attr($instance['title']);
 		$category = $instance['category'];
+		if ($category !== 0 && term_exists($category, 'mg_qt_category') === 0)
+			$category = 0;
 		?>
 			<p>
 				<label for="<?php echo $this->get_field_id('title'); ?>">
