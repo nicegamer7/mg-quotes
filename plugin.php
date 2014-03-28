@@ -18,4 +18,4 @@ require_once MG_QT_INCLUDES . 'functions.php';
 require_once MG_QT_INCLUDES . 'admin.php';
 require_once MG_QT_INCLUDES . 'template-tags.php';
 require_once MG_QT_INCLUDES . 'shortcodes.php';
-require_once MG_QT_INCLUDES . 'widgets.php';
+require_once MG_QT_INCLUDES . 'widgets/init.php';
