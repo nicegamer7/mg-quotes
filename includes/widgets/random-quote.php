@@ -51,6 +51,7 @@ class mg_qt_Random_Quote extends WP_Widget {
 						'show_option_all' => __('From all categories', 'mg_qt'),
 						'show_option_none' => __('From all categories', 'mg_qt'),
 						'hierarchical' => 1,
+						'show_count' => 1,
 						'orderby' => 'name',
 						'class' => 'widefat'
 					));
