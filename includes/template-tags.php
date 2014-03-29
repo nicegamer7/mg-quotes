@@ -96,29 +96,14 @@ function mg_qt_random_quote_from_author($author) {
  *
  */
 
-function mg_qt_get_quote($query) {
-	global $mg_qt_template_loader, $mg_qt;
+function mg_qt_get_quote($query_args) {
+	global $mg_qt_template_loader, $quote;
 	
-	$q = new WP_Query($query);
+	$quote = mg_qt_query_quote($query_args);
 	
-	if (!$q->have_posts())
+	if (empty($quote))
 		return '';
 		
-	$q->the_post();
-	
-	$mg_qt['quote'] = get_the_content();
-	$mg_qt['quote'] = apply_filters('the_content', $mg_qt['quote']);
-	$mg_qt['quote'] = str_replace(']]>', ']]&gt;', $mg_qt['quote']);
-	
-	$post_id = get_the_ID();
-	$mg_qt['author'] = get_post_meta($post_id, 'mg_qt_author', true);
-	$mg_qt['mg_qt_where'] = get_post_meta($post_id, 'mg_qt_where', true);
-	$mg_qt['mg_qt_url'] = get_post_meta($post_id, 'mg_qt_url', true);
-	$mg_qt['mg_qt_when'] = get_post_meta($post_id, 'mg_qt_when', true);
-	$mg_qt['mg_qt_notes'] = get_post_meta($post_id, 'mg_qt_notes', true);
-	
-	wp_reset_postdata();
-	
 	ob_start();
 		require_once MG_QT_INCLUDES . 'vendor/class-gamajo-template-loader.php';
 		require_once MG_QT_INCLUDES . 'vendor/class-mg-qt-template-loader.php';
@@ -126,5 +111,5 @@ function mg_qt_get_quote($query) {
 		$mg_qt_template_loader->get_template_part('quote');
 	$html = ob_get_clean();
 	
-	return apply_filters('mg_qt_quote_markup', $html, $mg_qt);
+	return apply_filters('mg_qt_quote_markup', $html, $quote);
 }

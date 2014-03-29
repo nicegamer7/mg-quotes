@@ -22,7 +22,7 @@ class mg_qt_Single_Quote extends WP_Widget {
 		$instance = wp_parse_args((array)$instance, $this->factory_settings);
 		
 		$title = esc_attr($instance['title']);
-		$quotes = mg_qt_get_quotes();
+		$quotes = mg_qt_query_quotes();
 		
 		$current_quote = $instance['quote'];
 		if ($current_quote !== 0 && !isset($quotes[$current_quote]))

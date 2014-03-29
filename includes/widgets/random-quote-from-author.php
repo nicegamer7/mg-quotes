@@ -22,7 +22,7 @@ class mg_qt_Random_Quote_From_Author extends WP_Widget {
 		$instance = wp_parse_args((array)$instance, $this->factory_settings);
 		
 		$title = esc_attr($instance['title']);
-		$authors = mg_qt_get_authors();
+		$authors = mg_qt_query_authors();
 		$quote_author = $instance['author'];
 		if ($quote_author !== '' && !in_array($quote_author, $authors))
 			$quote_author = '';

@@ -1,10 +1,10 @@
-<?php global $mg_qt; ?>
+<?php global $quote; ?>
 
 <blockquote class="mg_qt_quote">
-	<?php echo $mg_qt['quote']; ?>
-	<?php if (!empty($mg_qt['author'])): ?>
+	<?php echo $quote['quote']; ?>
+	<?php if (!empty($quote['author'])): ?>
 		<footer class="meta">
-			<cite class="author"><?php echo $mg_qt['author']; ?></cite>
+			<cite class="author"><?php echo $quote['author']; ?></cite>
 		</footer>
 	<?php endif; ?>
 </blockquote>
