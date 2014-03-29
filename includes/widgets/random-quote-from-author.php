@@ -18,30 +18,6 @@ class mg_qt_Random_Quote_From_Author extends WP_Widget {
 		);
 	}
 	
-	public function widget($args, $instance) {
-		$instance = wp_parse_args((array)$instance, $this->factory_settings);
-		
-		if (empty($instance['author']))
-			return;
-			
-		$quote_markup = mg_qt_get_random_quote_from_author($instance['author']);
-		if ($quote_markup === '')
-			return;
-		
-		extract($args);
-		
-		$title = apply_filters('widget_title', $instance['title'], $instance, $this->id_base);
-		
-		echo $before_widget;
-		
-		if ($title)
-			echo $before_title . $title . $after_title;
-			
-		echo $quote_markup;
-		
-		echo $after_widget;
-	}
-	
 	public function form($instance) {
 		$instance = wp_parse_args((array)$instance, $this->factory_settings);
 		
@@ -91,6 +67,30 @@ class mg_qt_Random_Quote_From_Author extends WP_Widget {
 		$instance['author'] = strip_tags($new_instance['author']);
 		
 		return $instance;
+	}
+	
+	public function widget($args, $instance) {
+		$instance = wp_parse_args((array)$instance, $this->factory_settings);
+		
+		if (empty($instance['author']))
+			return;
+			
+		$quote_markup = mg_qt_get_random_quote_from_author($instance['author']);
+		if ($quote_markup === '')
+			return;
+		
+		extract($args);
+		
+		$title = apply_filters('widget_title', $instance['title'], $instance, $this->id_base);
+		
+		echo $before_widget;
+		
+		if ($title)
+			echo $before_title . $title . $after_title;
+			
+		echo $quote_markup;
+		
+		echo $after_widget;
 	}
 
 }
