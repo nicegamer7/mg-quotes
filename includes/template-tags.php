@@ -105,8 +105,8 @@ function mg_qt_get_quote($query_args) {
 		return '';
 		
 	ob_start();
-		require_once MG_QT_INCLUDES . 'vendor/class-gamajo-template-loader.php';
-		require_once MG_QT_INCLUDES . 'vendor/class-mg-qt-template-loader.php';
+		require_once MG_QT_INCLUDES . 'vendor/gamajo-template-loader/class-gamajo-template-loader.php';
+		require_once MG_QT_INCLUDES . 'vendor/gamajo-template-loader/class-mg-qt-template-loader.php';
 		$mg_qt_template_loader = new mg_qt_Template_Loader();
 		$mg_qt_template_loader->get_template_part('quote');
 	$html = ob_get_clean();

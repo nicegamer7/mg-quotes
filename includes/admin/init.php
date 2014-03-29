@@ -3,7 +3,7 @@
 // Setup CPT
 add_action('init', 'mg_qt_setup_post_type');
 add_action('init', 'mg_qt_register_taxonomies');
-require_once MG_QT_INCLUDES . 'meta-box.php';
+require_once MG_QT_INCLUDES . 'admin/meta-box.php';
 
 //
 add_action('wp_insert_post_data', 'mg_qt_quote_title', 10, 2);
@@ -116,7 +116,7 @@ function mg_qt_category_dropdown() {
 	if ($selected === '')
 		$selected = 0;
 		
-	require_once MG_QT_INCLUDES . 'tax-dropdown.php';
+	require_once MG_QT_INCLUDES . 'admin/tax-dropdown.php';
 		
 	wp_dropdown_categories(array(
 		'taxonomy' => 'mg_qt_category',
