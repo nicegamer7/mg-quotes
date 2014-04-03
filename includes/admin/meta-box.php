@@ -5,6 +5,12 @@ add_action('save_post_mg_qt_quote', 'mg_qt_save_meta_box');
 
 function mg_qt_add_register_meta_boxes() {
 	add_meta_box(
+		'mg_qt_quote_author',
+		'Quote Author',
+		'mg_qt_render_author_meta_box'
+	);
+	
+	add_meta_box(
 		'mg_qt_quote_info',
 		'Attribution Fields',
 		'mg_qt_render_attribution_meta_box'
@@ -158,5 +164,25 @@ function mg_qt_render_title_meta_box($post) {
 		</div>
 		<?php wp_nonce_field( 'samplepermalink', 'samplepermalinknonce', false ); ?>
 	</div><!-- /titlediv -->
+	<?php
+}
+
+function mg_qt_render_author_meta_box($post, $box) {
+	$author_terms = get_the_terms($post->ID, 'mg_qt_author');
+	if (!empty($author_terms))
+		$author_name = $author_terms[0]->name;
+	else
+		$author_name = '';
+	?>
+		<input 
+			id="mg_qt_author_input" 
+			type="text" 
+			name="tax_input[mg_qt_author]" 
+			value="<?php echo esc_attr($author_name); ?>" 
+			size="16" 
+			autocomplete="off" 
+			class=""
+			style="position: relative;"
+		>
 	<?php
 }

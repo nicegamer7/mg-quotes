@@ -50,34 +50,11 @@ function mg_qt_register_taxonomies() {
 		'show_in_menu'          => true,
 		'show_in_nav_menus'     => true,
 		'show_tagcloud'         => true,
-		'meta_box_cb'           => 'mg_qt_author_meta_box',
+		'meta_box_cb'           => false,
 		'capabilities'          => array(),
 		'rewrite' => array('slug' => __('Author', 'mg_qt')),
 		'query_var'             => 'mg_qt_author',
 		'update_count_callback' => '',
 		//'show_admin_column' => true // Where is it used?
 	));
-}
-
-function mg_qt_author_meta_box($post, $box) {
-	//mg_qt_log($post);
-	//mg_qt_log($box);
-	
-	$author_terms = get_the_terms($post->ID, 'mg_qt_author');
-	if (!empty($author_terms))
-		$author_name = $author_terms[0]->name;
-	else
-		$author_name = '';
-	?>
-		<input 
-			id="mg_qt_author_input" 
-			type="text" 
-			name="tax_input[mg_qt_author]" 
-			value="<?php echo esc_attr($author_name); ?>" 
-			size="16" 
-			autocomplete="off" 
-			class=""
-			style="position: relative;"
-		>
-	<?php
 }
