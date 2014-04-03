@@ -82,7 +82,7 @@ function mg_qt_custom_columns($columns) {
 	return $columns;
 }
 
-functwion mg_qt_custom_columns_data($column_id, $post_id) {
+function mg_qt_custom_columns_data($column_id, $post_id) {
 	switch ($column_id) {
 		case 'quote_author':
 			echo get_post_meta($post_id, 'mg_qt_author', true);

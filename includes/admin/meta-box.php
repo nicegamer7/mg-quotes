@@ -1,6 +1,10 @@
 <?php
 
 add_action('add_meta_boxes_mg_qt_quote', 'mg_qt_add_register_meta_boxes');
+
+add_action('admin_print_styles-post-new.php', 'mg_qt_injection');
+add_action('admin_print_styles-post.php', 'mg_qt_injection');
+
 add_action('save_post_mg_qt_quote', 'mg_qt_save_meta_box');
 
 function mg_qt_add_register_meta_boxes() {
@@ -185,4 +189,14 @@ function mg_qt_render_author_meta_box($post, $box) {
 			style="position: relative;"
 		>
 	<?php
+}
+
+function mg_qt_injection() {
+	global $post_type;
+	
+	if ($post_type !== 'mg_qt_quote')
+		return;
+	
+	//wp_enqueue_style('mg_qt_links');
+	wp_enqueue_script('mg_qt_mb');
 }
