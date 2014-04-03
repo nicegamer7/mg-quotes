@@ -14,6 +14,15 @@ if (!defined('ABSPATH')) exit;
 define('MG_QT_PLUGIN_DIR_PATH', plugin_dir_path(__FILE__));
 define('MG_QT_INCLUDES', MG_QT_PLUGIN_DIR_PATH . 'includes/');
 
+function mg_qt_log($x) {	
+	$out = '';
+	ob_start();
+	var_dump($x);
+	$out .= ob_get_clean();
+	
+	error_log($out);
+}
+
 require_once MG_QT_INCLUDES . 'admin/init.php';
 require_once MG_QT_INCLUDES . 'query.php';
 require_once MG_QT_INCLUDES . 'template-tags.php';

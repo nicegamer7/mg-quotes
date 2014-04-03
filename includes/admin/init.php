@@ -2,7 +2,8 @@
 
 // Setup CPT
 add_action('init', 'mg_qt_setup_post_type');
-add_action('init', 'mg_qt_register_taxonomies');
+
+require_once MG_QT_INCLUDES . 'admin/taxonomies.php';
 require_once MG_QT_INCLUDES . 'admin/meta-box.php';
 
 //
@@ -53,17 +54,6 @@ function mg_qt_setup_post_type() {
 	);
 	
 	register_post_type('mg_qt_quote', $args);
-}
-
-function mg_qt_register_taxonomies() {
-	register_taxonomy('mg_qt_category', 'mg_qt_quote', array(
-		'query_var' => true,
-		'label' => __('Quote Categories', 'mg_qt'),
-		'rewrite' => array('slug' => __('Category', 'mg_qt')),
-		'hierarchical' => true
-		//'show_admin_column' => true
-		//'capabilities' => array()
-	));
 }
 
 function mg_qt_quote_title($data, $postarr) {
