@@ -13,6 +13,8 @@ if (!defined('ABSPATH')) exit;
 
 define('MG_QT_PLUGIN_DIR_PATH', plugin_dir_path(__FILE__));
 define('MG_QT_INCLUDES', MG_QT_PLUGIN_DIR_PATH . 'includes/');
+define('MG_QT_PLUGIN_DIR_URL', plugin_dir_url(__FILE__));
+define('MG_QT_ASSETS', MG_QT_PLUGIN_DIR_URL . 'assets/');
 
 function mg_qt_log($x) {	
 	$out = '';
