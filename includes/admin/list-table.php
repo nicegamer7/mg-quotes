@@ -1,7 +1,7 @@
 <?php
 
 add_filter('manage_mg_qt_quote_posts_columns', 'mg_qt_custom_columns');
-add_filter('manage_posts_custom_column', 'mg_qt_custom_columns_data', 10, 2);
+//add_filter('manage_posts_custom_column', 'mg_qt_custom_columns_data', 10, 2);
 add_filter('months_dropdown_results', 'mg_qt_remove_months_dropdown', 10, 2);
 add_action('restrict_manage_posts', 'mg_qt_category_dropdown');
 
@@ -9,23 +9,24 @@ function mg_qt_custom_columns($columns) {
 	$columns = array(
 		'cb' => '<input type="checkbox">',
 		'title' => __('Title', 'mg_qt'),
-		'quote_author' => __('Author', 'mg_qt'),
+		'taxonomy-mg_qt_author' => __('Author', 'mg_qt'),
 		'taxonomy-mg_qt_category' => __('Category', 'mg_qt')
-		//'quote_category' => __('Category', 'mg_qt')
 	);
 	
 	return $columns;
 }
 
+/* 
 function mg_qt_custom_columns_data($column_id, $post_id) {
 	switch ($column_id) {
 		case 'quote_author':
-			echo get_post_meta($post_id, 'mg_qt_author', true);
+			
 			break;
-		/* case 'quote_category':
-			 break;*/
+		case 'quote_category':
+			 break;
 	}
 }
+*/
 
 function mg_qt_remove_months_dropdown($months, $post_type) {
 	return $post_type === 'mg_qt_quote' ? array() : $months;
