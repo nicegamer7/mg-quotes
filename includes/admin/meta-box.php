@@ -28,17 +28,11 @@ function mg_qt_add_register_meta_boxes() {
 }
 
 function mg_qt_render_attribution_meta_box($post) {
-	$author = get_post_meta($post->ID, 'mg_qt_author', true);
 	$where = get_post_meta($post->ID, 'mg_qt_where', true);
 	$url = get_post_meta($post->ID, 'mg_qt_url', true);
 	$when = get_post_meta($post->ID, 'mg_qt_when', true);
 	$notes = get_post_meta($post->ID, 'mg_qt_notes', true);
 	?>
-		<p>
-			<label for="quote_author">Who</label>
-			<input id="quote_author" name="quote_info[author]" type="text" value="<?php echo $author; ?>" style="width: 50%;"> <!-- escaping -->
-		</p>
-		
 		<p>
 			<label for="quote_where">Where</label>
 			<input id="quote_where" name="quote_info[where]" type="text" value="<?php echo $where; ?>" style="width: 50%;"> <!-- escaping -->
@@ -80,13 +74,6 @@ function mg_qt_save_meta_box($post_id) {
 
 	$quote_info = $_POST['quote_info'];
 	
-	$author = $quote_info['author'];
-	$author = trim(preg_replace('/[\r\n\t ]+/', ' ', $author));
-	if (!empty($author))
-			update_post_meta($post_id, 'mg_qt_author', $author);
-	else
-		delete_post_meta($post_id, 'mg_qt_author');
-		
 	$where = $quote_info['where'];
 	// sanitize
 	if (!empty($where))
