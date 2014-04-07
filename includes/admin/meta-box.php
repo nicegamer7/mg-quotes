@@ -159,7 +159,7 @@ function mg_qt_render_title_meta_box($post) {
 }
 
 function mg_qt_render_author_meta_box($post, $box) {
-	$author_name = $mg_qt_query->quote_author_name($post->ID);
+	$author_name = mg_qt_Query::quote_author_name($post->ID);
 	?>
 		<input 
 			id="mg_qt_author_input" 

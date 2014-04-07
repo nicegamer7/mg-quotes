@@ -60,12 +60,46 @@ class mg_qt_Query {
 		return self::rnd_quote_from_author_slug($term->slug);
 	}
 	
+	public static function rnd_quote_from_author_id($id) {
+		$term = get_term($id, 'mg_qt_author');
+		
+		if ($term === null || is_wp_error($term))
+			return false;
+	
+		return self::rnd_quote_from_author_slug($term->slug); 
+	}
+	
 	public static function rnd_quote_from_author_slug($slug) {
 		return self::single_quote(array(
 			'post_type' => 'mg_qt_quote',
 			'orderby' => 'rand',
 			'posts_per_page' => 1,
 			'mg_qt_author' => $slug
+		));
+	}
+	
+	public static function rnd_quote_from_cat_and_author($category, $author) {
+		return self::single_quote(array(
+			'post_type' => 'mg_qt_quote',
+			'orderby' => 'rand',
+			'posts_per_page' => 1,
+			'tax_query' => array(
+				'relation' => 'AND',
+				array(
+					'taxonomy' => 'mg_qt_category',
+					'field' => 'term_id',
+					'terms' => $category,
+					'include_children' => true,
+					'operator' => 'IN'
+				),
+				array(
+					'taxonomy' => 'mg_qt_author',
+					'field' => 'term_id',
+					'terms' => $author,
+					'include_children' => false,
+					'operator' => 'IN'
+				)
+			)
 		));
 	}
 	
@@ -134,5 +168,23 @@ class mg_qt_Query {
 		
 		return $quote;
 	}
+	
+	public static function there_are_categories() {
+		return wp_count_terms('mg_qt_category') > 0;
+	}
+	
+	public  static function category_exists($id) {
+		return term_exists($id, 'mg_qt_category') !== 0;
+	}
+	
+	public static function there_are_authors() {
+		return wp_count_terms('mg_qt_author') > 0;
+	}
+	
+	public  static function author_exists($id) {
+		return term_exists($id, 'mg_qt_author') !== 0;
+	}
+	
+	
 	
 }

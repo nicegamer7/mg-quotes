@@ -4,7 +4,8 @@ class mg_qt_Random_Quote extends WP_Widget {
 
 	private $factory_settings = array(
 		'title' => '',
-		'category' => 0
+		'category' => 0,
+		'author' => 0
 	);
 
 	public function __construct() {
@@ -12,7 +13,7 @@ class mg_qt_Random_Quote extends WP_Widget {
 			'mg_qt_widget_random_quote',
 			__('Random Quote', 'mg_qt'),
 			array(
-				'description' => __('Pick a random quotes. Supports categories', 'mg_qt'),
+				'description' => __('Pick a random quotes. Supports categories and authors', 'mg_qt'),
 				'classname' => 'mg_qt_widget_random_quote'
 			) 
 		);
@@ -24,11 +25,19 @@ class mg_qt_Random_Quote extends WP_Widget {
 		$title = esc_attr($instance['title']);
 		
 		$category = $instance['category'];
-		if (wp_count_terms('mg_qt_category') === 0)
-			$category = -1;
-		else if ($category > 0 && term_exists($category, 'mg_qt_category') === 0)
+		$display_cat_select = mg_qt_Query::there_are_categories();
+		if ($display_cat_select) {
+			if ($category > 0 && !mg_qt_Query::category_exists($category) )
 			$category = 0;
-			
+		}
+		
+		$author = $instance['author'];
+		$display_author_select = mg_qt_Query::there_are_authors();
+		if ($display_author_select) {
+			if ($author > 0 && !mg_qt_Query::author_exists($author) )
+			$author = 0;
+		}
+		
 		?>
 			<p>
 				<label for="<?php echo $this->get_field_id('title'); ?>"><?php _e('Title:', 'mg_qt'); ?> 
@@ -41,22 +50,42 @@ class mg_qt_Random_Quote extends WP_Widget {
 					/>
 				</label>
 			</p>
-			<p>
-				<label for="<?php echo $this->get_field_id('category'); ?>"><?php _e('Category:', 'mg_qt'); ?></label> 
-				<?php
-					wp_dropdown_categories(array(
-						'taxonomy' => 'mg_qt_category',
-						'name' => $this->get_field_name('category'),
-						'selected' => $category,
-						'show_option_all' => __('From all categories', 'mg_qt'),
-						'show_option_none' => __('From all categories', 'mg_qt'),
-						'hierarchical' => 1,
-						'show_count' => 1,
-						'orderby' => 'name',
-						'class' => 'widefat'
-					));
-				?>
-			</p>
+			
+			<?php if ($display_cat_select): ?>
+				<p>
+					<label for="<?php echo $this->get_field_id('category'); ?>"><?php _e('Category:', 'mg_qt'); ?></label> 
+					<?php
+						wp_dropdown_categories(array(
+							'taxonomy' => 'mg_qt_category',
+							'name' => $this->get_field_name('category'),
+							'selected' => $category,
+							'show_option_all' => __('From all categories', 'mg_qt'),
+							'hierarchical' => 1,
+							'show_count' => 1,
+							'orderby' => 'name',
+							'class' => 'widefat'
+						));
+					?>
+				</p>
+			<?php endif; ?>
+			
+			<?php if ($display_author_select): ?>
+				<p>
+					<label for="<?php echo $this->get_field_id('author'); ?>"><?php _e('Author:', 'mg_qt'); ?></label> 
+					<?php
+						wp_dropdown_categories(array(
+							'taxonomy' => 'mg_qt_author',
+							'name' => $this->get_field_name('author'),
+							'selected' => $author,
+							'show_option_all' => __('From all authors', 'mg_qt'),
+							'hierarchical' => 0,
+							'show_count' => 1,
+							'orderby' => 'name',
+							'class' => 'widefat'
+						));
+					?>
+				</p>
+			<?php endif; ?>
 		<?php
 	}
 	
@@ -65,6 +94,7 @@ class mg_qt_Random_Quote extends WP_Widget {
 		
 		$instance['title'] = strip_tags($new_instance['title']);
 		$instance['category'] = absint($new_instance['category']);
+		$instance['author'] = absint($new_instance['author']);
 		
 		return $instance;
 	}
@@ -72,10 +102,23 @@ class mg_qt_Random_Quote extends WP_Widget {
 	public function widget($args, $instance) {
 		$instance = wp_parse_args((array)$instance, $this->factory_settings);
 		
-		$quote_markup = $instance['category'] === 0 ? 
-			mg_qt_get_random_quote() : 
-			mg_qt_get_random_quote_from_category_id($instance['category'])
-		;
+		$category = $instance['category'];
+		$author = $instance['author'];
+		
+		if ($category === 0 && $author === 0) {
+			$quote = mg_qt_Query::rnd_quote();
+		}
+		else if ($category > 0 && $author === 0) {
+			$quote = mg_qt_Query::rnd_quote_from_category_id($category);
+		}
+		else if ($category === 0 && $author > 0) {
+			$quote = mg_qt_Query::rnd_quote_from_author_id($author);
+		}
+		else { // ($category > 0 && $author > 0)
+			$quote = mg_qt_Query::rnd_quote_from_cat_and_author($category, $author);
+		}
+		
+		$quote_markup = mg_qt_markup($quote);
 		
 		if ($quote_markup === '')
 			return;
