@@ -137,6 +137,22 @@ class mg_qt_Query {
 		return $quotes;
 	}
 	
+	public static function there_are_categories() {
+		return wp_count_terms('mg_qt_category') > 0;
+	}
+	
+	public  static function category_exists($id) {
+		return term_exists($id, 'mg_qt_category') !== 0;
+	}
+	
+	public static function there_are_authors() {
+		return wp_count_terms('mg_qt_author') > 0;
+	}
+	
+	public  static function author_exists($id) {
+		return term_exists($id, 'mg_qt_author') !== 0;
+	}
+	
 	/*
 	 * Execute a single quote query.
 	 * Returns an associative array with the quote fields.
@@ -159,32 +175,11 @@ class mg_qt_Query {
 		$post_id = get_the_ID();
 		
 		$quote['author'] = self::quote_author_name($post_id);
-		$quote['mg_qt_where'] = get_post_meta($post_id, 'mg_qt_where', true);
-		$quote['mg_qt_url'] = get_post_meta($post_id, 'mg_qt_url', true);
-		$quote['mg_qt_when'] = get_post_meta($post_id, 'mg_qt_when', true);
-		$quote['mg_qt_notes'] = get_post_meta($post_id, 'mg_qt_notes', true);
 		
 		wp_reset_postdata();
 		
 		return $quote;
 	}
-	
-	public static function there_are_categories() {
-		return wp_count_terms('mg_qt_category') > 0;
-	}
-	
-	public  static function category_exists($id) {
-		return term_exists($id, 'mg_qt_category') !== 0;
-	}
-	
-	public static function there_are_authors() {
-		return wp_count_terms('mg_qt_author') > 0;
-	}
-	
-	public  static function author_exists($id) {
-		return term_exists($id, 'mg_qt_author') !== 0;
-	}
-	
 	
 	
 }

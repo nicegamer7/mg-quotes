@@ -28,7 +28,7 @@ function mg_qt_setup_post_type() {
 		'capability_type'      => 'post',
 		'capabilities'         => array(),
 		'map_meta_cap'         => null,
-		'supports'             => array(/* 'title',  */'editor'),
+		'supports'             => array('editor', 'custom-fields'),
 		'register_meta_box_cb' => null,
 		'taxonomies'           => array(),
 		'has_archive'          => false,
@@ -37,7 +37,7 @@ function mg_qt_setup_post_type() {
 		'can_export'           => true,
 		'delete_with_user'     => null,
 		'_builtin'             => false,
-		'_edit_link'           => 'post.php?post=%d',
+		'_edit_link'           => 'post.php?post=%d'
 	);
 	
 	register_post_type('mg_qt_quote', $args);
