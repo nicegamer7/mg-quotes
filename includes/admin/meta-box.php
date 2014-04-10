@@ -81,7 +81,7 @@ function mg_qt_render_author_meta_box($post, $box) {
 			size="16" 
 			autocomplete="off" 
 			class=""
-			style="position: relative;"
+			style="position: relative; width: 50%"
 		>
 	<?php
 }
