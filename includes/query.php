@@ -190,8 +190,6 @@ class mg_qt_Query {
 		
 		$quote['author'] = self::quote_author_name($post_id);
 		
-		$quote['categories'] = self::quote_categories($post_id);
-		
 		wp_reset_postdata();
 		
 		return $quote;
