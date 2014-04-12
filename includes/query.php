@@ -111,6 +111,17 @@ class mg_qt_Query {
 		;
 	}
 	
+	public static function quote_categories($post_id) {
+		$categories = array();
+		
+		$terms = get_the_terms($post_id, 'mg_qt_category');
+		if (!empty($terms))
+			foreach (array_values($terms) as $term)
+				$categories[] = array('name' => $term->name, 'id' => $term->term_id, 'slug' => $term->slug);
+		
+		return $categories;
+	}
+	
 	public static function authors() {
 		return get_terms('mg_qt_authors', array(
 			'hide_empty' => false,
@@ -168,13 +179,18 @@ class mg_qt_Query {
 			
 		$query->the_post();
 		
-		$quote['quote'] = get_the_content();
-		$quote['quote'] = apply_filters('the_content', $quote['quote']);
-		$quote['quote'] = str_replace(']]>', ']]&gt;', $quote['quote']);
+		$quote['content'] = get_the_content();
+		$quote['content'] = apply_filters('the_content', $quote['content']);
+		$quote['content'] = str_replace(']]>', ']]&gt;', $quote['content']);
+		
+		$quote['title'] = get_the_title();
 		
 		$post_id = get_the_ID();
+		$quote['id'] = $post_id;
 		
 		$quote['author'] = self::quote_author_name($post_id);
+		
+		$quote['categories'] = self::quote_categories($post_id);
 		
 		wp_reset_postdata();
 		
