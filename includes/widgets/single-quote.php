@@ -72,7 +72,11 @@ class mg_qt_Single_Quote extends WP_Widget {
 		if ($instance['quote'] === 0)
 			return;
 			
-		$quote_markup = mg_qt_get_quote_by_id($instance['quote']);
+		$quote = mg_qt_Query::quote_by_id($instance['quote']);
+		if (empty($quote))
+			return;
+			
+		$quote_markup = mg_qt_markup($quote);
 		if ($quote_markup === '')
 			return;
 		
