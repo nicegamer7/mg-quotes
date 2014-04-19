@@ -51,7 +51,7 @@ function mg_qt_quote_title($data, $postarr) {
 		$title = strip_shortcodes($title);
 		$title = apply_filters('the_content', $title);
 		$title = str_replace(']]>', ']]&gt;', $title);
-		$title = wp_trim_words($title, 10);
+		$title = wp_trim_words($title, 10, '...');
 		
 		$data['post_title'] = $title;
 	}
