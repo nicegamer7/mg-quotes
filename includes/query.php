@@ -135,7 +135,9 @@ class mg_qt_Query {
 		$query = new WP_Query(array(
 			'post_type' => 'mg_qt_quote',
 			'post_status' => 'publish',
-			'posts_per_page' => -1
+			'posts_per_page' => -1,
+			'orderby' => 'title',
+			'order' => 'ASC'
 		));
 		
 		while ($query->have_posts()) {
