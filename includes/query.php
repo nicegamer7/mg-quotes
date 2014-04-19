@@ -180,8 +180,8 @@ class mg_qt_Query {
 		$query->the_post();
 		
 		$quote['content'] = get_the_content();
-		$quote['content'] = apply_filters('the_content', $quote['content']);
-		$quote['content'] = str_replace(']]>', ']]&gt;', $quote['content']);
+		$quote['content'] = wptexturize($quote['content']);
+		$quote['content'] = wpautop($quote['content']);
 		
 		$quote['title'] = get_the_title();
 		
@@ -194,6 +194,5 @@ class mg_qt_Query {
 		
 		return $quote;
 	}
-	
 	
 }

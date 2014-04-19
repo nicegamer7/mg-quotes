@@ -7,6 +7,15 @@ add_action('admin_print_styles-post.php', 'mg_qt_injection');
 
 function mg_qt_add_register_meta_boxes() {
 	add_meta_box(
+		'mg_qt_quote_content',
+		'Quote Content',
+		'mg_qt_render_content_meta_box',
+		null,
+		'normal',
+		'high'
+	);
+	
+	add_meta_box(
 		'mg_qt_quote_author',
 		'Quote Author',
 		'mg_qt_render_author_meta_box',
@@ -18,8 +27,17 @@ function mg_qt_add_register_meta_boxes() {
 	add_meta_box(
 		'mg_qt_quote_title',
 		'Quote Title',
-		'mg_qt_render_title_meta_box'
+		'mg_qt_render_title_meta_box',
+		null,
+		'advanced',
+		'default'
 	);
+}
+
+function mg_qt_render_content_meta_box($post) {
+	?>
+		<textarea name="post_content" style="width: 100%; height: 10em;"><?php echo esc_html($post->post_content);?></textarea>
+	<?php
 }
 
 function mg_qt_render_title_meta_box($post) {

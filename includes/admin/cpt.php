@@ -28,7 +28,7 @@ function mg_qt_setup_post_type() {
 		'capability_type'      => 'post',
 		'capabilities'         => array(),
 		'map_meta_cap'         => null,
-		'supports'             => array('editor', 'custom-fields'),
+		'supports'             => array('custom-fields'),
 		'register_meta_box_cb' => null,
 		'taxonomies'           => array(),
 		'has_archive'          => false,
