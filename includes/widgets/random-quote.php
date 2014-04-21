@@ -105,19 +105,21 @@ class mg_qt_Random_Quote extends WP_Widget {
 		$category = $instance['category'];
 		$author = $instance['author'];
 		
-		if ($category === 0 && $author === 0) {
-			$quote = mg_qt_Query::rnd_quote();
+		switch (2 * !empty($category) + !empty($author)) {
+			case 0:
+				$quote = mg_qt_Query::rnd_quote();
+				break;
+			case 1:
+				$quote = mg_qt_Query::rnd_quote_from_author_id($author);
+				break;
+			case 2:
+				$quote = mg_qt_Query::rnd_quote_from_category_id($category);
+				break;
+			case 3:
+				$quote = mg_qt_Query::rnd_quote_from_cat_and_author($category, $author);
+				break;
 		}
-		else if ($category > 0 && $author === 0) {
-			$quote = mg_qt_Query::rnd_quote_from_category_id($category);
-		}
-		else if ($category === 0 && $author > 0) {
-			$quote = mg_qt_Query::rnd_quote_from_author_id($author);
-		}
-		else { // ($category > 0 && $author > 0)
-			$quote = mg_qt_Query::rnd_quote_from_cat_and_author($category, $author);
-		}
-		
+			
 		$quote_markup = mg_qt_markup($quote);
 		
 		if ($quote_markup === '')
