@@ -182,9 +182,6 @@ class mg_qt_Query {
 		$query->the_post();
 		
 		$quote['content'] = get_the_content();
-		$quote['content'] = wptexturize($quote['content']);
-		$quote['content'] = wpautop($quote['content']);
-		
 		$quote['title'] = get_the_title();
 		
 		$post_id = get_the_ID();

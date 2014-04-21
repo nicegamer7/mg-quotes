@@ -4,6 +4,9 @@ function mg_qt_markup($quote) {
 	if (empty($quote))
 		return '';
 		
+	$quote['content'] = wptexturize($quote['content']);
+	$quote['content'] = wpautop($quote['content']);
+		
 	ob_start();
 	?>
 		<blockquote class="mg_qt_quote">
