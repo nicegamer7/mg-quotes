@@ -1,68 +1,44 @@
 <?php
 
 /*
- * Pick one random quote
+ * Get a single quote, specified by its ID
  */
-function mg_qt_get_rnd_quote() {
-	return mg_qt_markup(mg_qt_Query::rnd_quote());
-}
-
-/*
- * Get a quote by its ID.
- */
-function mg_qt_get_quote_by_id($id) {
+function mg_qt_get_quote($id) {
 	return mg_qt_markup(mg_qt_Query::quote_by_id($id));
 }
 
 /*
- * Get all quotes within a given category
- *
- * $cat: the category name
+ * Pick one random quote, optionally from the category and/or the author specified(by they names)
  */
-function mg_qt_get_rnd_quote_from_category_name($cat_name) {
-	return mg_qt_markup(mg_qt_Query::rnd_quote_from_category_name($cat_name));
-}
- 
-function mg_qt_get_rnd_quote_from_category_id($id) {
-	return mg_qt_markup(mg_qt_Query::rnd_quote_from_category_id($id));
-}
-
-function mg_qt_get_rnd_quote_from_category_slug($cat_slug) {
-	return mg_qt_markup(mg_qt_Query::rnd_quote_from_category_slug($cat_slug));
-}
-
-/*
- * Get a random quote from an author
- */
-function mg_qt_get_rnd_quote_from_author_name($author_name) {
-	return mg_qt_markup(mg_qt_Query::rnd_quote_from_author_name($author_name));
+function mg_qt_get_rnd_quote($category = null, $author = null) {
+	switch (2 * !empty($category) + !empty($author)) {
+		case 0:
+			$quote = mg_qt_Query::rnd_quote();
+			break;
+		case 1:
+			$quote = mg_qt_Query::rnd_quote_from_author_name($author);
+			break;
+		case 2:
+			$quote = mg_qt_Query::rnd_quote_from_category_name($category);
+			break;
+		case 3:
+			$category = get_term_by('name', $category, 'mg_qt_category');
+			$author = get_term_by('name', $autohr, 'mg_qt_author');
+			$quote = mg_qt_Query::rnd_quote_from_cat_and_author($category, $author);
+			break;
+	}
+		
+	return mg_qt_markup($quote);
 }
 
 /*
  * echoing template tags
- *
  */
  
-function mg_qt_rnd_quote() {
-	echo mg_qt_get_rnd_quote();
-}
-
 function mg_qt_quote($id) {
 	echo mg_qt_get_quote($id);
 }
  
-function mg_qt_rnd_quote_from_category_id($id) {
-	echo mg_qt_get_rnd_quote_from_category_id($id);
-}
-
-function mg_qt_rnd_quote_from_category_name($name) {
-	echo mg_qt_get_rnd_quote_from_category_name($name);
-}
-
-function mg_qt_rnd_quote_from_category_slug($slug) {
-	echo mg_qt_get_rnd_quote_from_category_slug($slug);
-}
-
-function mg_qt_rnd_quote_from_author($author) {
-	echo mg_qt_get_rnd_quote_from_author($author);
+function mg_qt_rnd_quote($category = null, $author = null){
+	echo mg_qt_get_rnd_quote($category, $author);
 }
