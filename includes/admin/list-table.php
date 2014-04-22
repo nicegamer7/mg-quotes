@@ -4,6 +4,12 @@ add_filter('manage_mg_qt_quote_posts_columns', 'mg_qt_custom_columns');
 //add_filter('manage_posts_custom_column', 'mg_qt_custom_columns_data', 10, 2);
 add_filter('months_dropdown_results', 'mg_qt_remove_months_dropdown', 10, 2);
 add_action('restrict_manage_posts', 'mg_qt_taxonomy_dropdowns');
+add_filter('post_row_actions', 'mg_qt_row_actions', 10, 2);
+
+function mg_qt_row_actions($actions, $post) {
+	$actions = array_merge(array('id' => "ID: $post->ID"), $actions);
+	return $actions;
+}
 
 function mg_qt_custom_columns($columns) {
 	$columns = array(
