@@ -1,56 +1,48 @@
 <?php
 
-add_shortcode('mg_qt_rnd_quote', 'mg_qt_sc_rnd_quote');
-add_shortcode('mg_qt_quote_by_id', 'mg_qt_sc_quote_by_id');
-add_shortcode('mg_qt_rnd_quote_from_category_name', 'mg_qt_sc_rnd_quote_from_category_name');
-add_shortcode('mg_qt_rnd_quote_from_category_id', 'mg_qt_sc_rnd_quote_from_category_id');
-add_shortcode('mg_qt_rnd_quote_from_category_slug', 'mg_qt_sc_rnd_quote_from_category_slug');
-add_shortcode('mg_qt_rnd_quote_from_author_name', 'mg_qt_sc_rnd_quote_from_author_name');
+class mg_qt_Shortcodes {
 
-function mg_qt_sc_rnd_quote() {
-	return mg_qt_get_rnd_quote();
+	public function __construct() {
+		add_shortcode('quote', array($this, 'quote'));
+		add_shortcode('rnd_quote', array($this, 'rnd_quote'));
+	}
+	
+	function quote($atts) {
+		extract(shortcode_atts(array(
+			'id' => '0'
+		), $atts));
+		
+		$id = absint($id);
+		
+		return $id > 0 ? mg_qt_markup(mg_qt_Query::quote_by_id($id)) : '';
+	}
+	
+	function rnd_quote($atts) {
+		extract(shortcode_atts(array(
+			'category' => '',
+			'author' => ''
+		), $atts));
+	
+		switch (2 * !empty($category) + !empty($author)) {
+			case 0:
+				$quote = mg_qt_Query::rnd_quote();
+				break;
+			case 1:
+				$quote = mg_qt_Query::rnd_quote_from_author_name($author);
+				break;
+			case 2:
+				$quote = mg_qt_Query::rnd_quote_from_category_name($category);
+				break;
+			case 3:
+				$category = get_term_by('name', $category, 'mg_qt_category');
+				$author = get_term_by('name', $author, 'mg_qt_author');
+				$quote = mg_qt_Query::rnd_quote_from_cat_and_author($category->term_id, $author->term_id);
+				break;
+		}
+		
+		return mg_qt_markup($quote);
+	}
+
 }
 
-function mg_qt_sc_quote_by_id($atts) {
-	extract(shortcode_atts(array(
-		'id' => '0'
-	), $atts));
-	
-	$id = absint($id);
-	
-	return $id > 0 ? mg_qt_get_quote_by_id($id) : '';
-}
-
-function mg_qt_sc_rnd_quote_from_category_name($atts) {
-	extract(shortcode_atts(array(
-		'name' => ''
-	), $atts));
-	
-	return !empty($name) ? mg_qt_get_rnd_quote_from_category_name($name) : '';
-}
-
-function mg_qt_sc_rnd_quote_from_category_id($atts) {
-	extract(shortcode_atts(array(
-		'id' => 0
-	), $atts));
-	
-	$id = absint($id);
-	
-	return $id > 0 ? mg_qt_get_rnd_quote_from_category_id($id) : '';
-}
-
-function mg_qt_sc_rnd_quote_from_category_slug($atts) {
-	extract(shortcode_atts(array(
-		'slug' => ''
-	), $atts));
-	
-	return !empty($slug) ? mg_qt_get_rnd_quote_from_category_slug($slug) : '';
-}
-
-function mg_qt_sc_rnd_quote_from_author_name($atts) {
-	extract(shortcode_atts(array(
-		'name' => ''
-	), $atts));
-	
-	return !empty($name) ? mg_qt_get_rnd_quote_from_author_name($name) : '';
-}
+new mg_qt_Shortcodes();
