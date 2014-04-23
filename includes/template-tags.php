@@ -23,7 +23,7 @@ function mg_qt_get_rnd_quote($category = null, $author = null) {
 			break;
 		case 3:
 			$category = get_term_by('name', $category, 'mg_qt_category');
-			$author = get_term_by('name', $autohr, 'mg_qt_author');
+			$author = get_term_by('name', $author, 'mg_qt_author');
 			$quote = mg_qt_Query::rnd_quote_from_cat_and_author($category, $author);
 			break;
 	}
