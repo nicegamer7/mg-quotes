@@ -23,9 +23,11 @@ function mg_qt_register_script_styles() {
 	wp_register_script('mg_qt_mb', MG_QT_ASSETS . 'js/mb.js', array('jquery', 'suggest'), '', true);
 }
 
+require_once MG_QT_INCLUDES . 'cpt.php';
+require_once MG_QT_INCLUDES . 'tax.php';
 require_once MG_QT_INCLUDES . 'query.php';
 require_once MG_QT_INCLUDES . 'templating/templating.php';
-require_once MG_QT_INCLUDES . 'admin/init.php';
 require_once MG_QT_INCLUDES . 'template-tags.php';
 require_once MG_QT_INCLUDES . 'shortcodes.php';
 require_once MG_QT_INCLUDES . 'widgets/init.php';
+require_once MG_QT_INCLUDES . 'admin/init.php';
