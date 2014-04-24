@@ -16,13 +16,6 @@ define('MG_QT_INCLUDES', MG_QT_PLUGIN_DIR_PATH . 'includes/');
 define('MG_QT_PLUGIN_DIR_URL', plugin_dir_url(__FILE__));
 define('MG_QT_ASSETS', MG_QT_PLUGIN_DIR_URL . 'assets/');
 
-add_action('admin_init', 'mg_qt_register_script_styles');
-
-function mg_qt_register_script_styles() {
-	//wp_register_style('mg-links', MG_LINKS_PLUGIN_DIR_URL . 'css/style.css');
-	wp_register_script('mg_qt_mb', MG_QT_ASSETS . 'js/mb.js', array('jquery', 'suggest'), '', true);
-}
-
 require_once MG_QT_INCLUDES . 'cpt.php';
 require_once MG_QT_INCLUDES . 'tax.php';
 require_once MG_QT_INCLUDES . 'query.php';
