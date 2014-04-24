@@ -24,7 +24,7 @@ function mg_qt_setup_post_type() {
 		'hierarchical'         => false,
 		'public'               => true,
 		//'menu_position'        => null,
-		'menu_icon'            => null,
+		'menu_icon'            => 'dashicons-format-quote',
 		'capability_type'      => 'post',
 		'capabilities'         => array(),
 		'map_meta_cap'         => null,
