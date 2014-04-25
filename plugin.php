@@ -1,8 +1,8 @@
 <?php
 /*
-Plugin Name: mg WP Quotes
-Plugin URI: http://wp-labs.dev/admin
-Description: An easy to use plugin for quotes.
+Plugin Name: mg Quotes
+Plugin URI: 
+Description: 
 Version: 1.0
 Author: Giulio 'mgiulio' Mainardi
 Author URI: http://m-giulio.me
