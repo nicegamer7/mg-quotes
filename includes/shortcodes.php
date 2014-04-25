@@ -1,5 +1,7 @@
 <?php
 
+if (!defined('ABSPATH')) exit;
+
 class mg_qt_Shortcodes {
 
 	public function __construct() {

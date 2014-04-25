@@ -1,5 +1,7 @@
 <?php
 
+if (!defined('ABSPATH')) exit;
+
 add_action('init', 'mg_qt_setup_post_type');
 
 function mg_qt_setup_post_type() {

@@ -1,5 +1,7 @@
 <?php
 
+if (!defined('ABSPATH')) exit;
+
 class mg_qt_Metaboxes {
 
 	public function __construct() {

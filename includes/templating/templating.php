@@ -1,5 +1,7 @@
 <?php
 
+if (!defined('ABSPATH')) exit;
+
 function mg_qt_markup($quote) {
 	if (empty($quote))
 		return '';

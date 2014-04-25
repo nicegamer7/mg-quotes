@@ -1,5 +1,7 @@
 <?php 
 
+if (!defined('ABSPATH')) exit;
+
 class mg_qt_Query {
 	
 	public static function quote_by_id($id) {

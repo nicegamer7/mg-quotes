@@ -1,5 +1,7 @@
 <?php
 
+if (!defined('ABSPATH')) exit;
+
 class mg_qt_Single_Quote extends WP_Widget {
 
 	private $factory_settings = array(

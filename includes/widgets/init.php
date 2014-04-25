@@ -1,4 +1,7 @@
 <?php
+
+if (!defined('ABSPATH')) exit;
+
 add_action('widgets_init', 'mg_qt_register_widgets');
 
 function mg_qt_register_widgets() {

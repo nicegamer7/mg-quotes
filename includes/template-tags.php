@@ -1,5 +1,7 @@
 <?php
 
+if (!defined('ABSPATH')) exit;
+
 /*
  * Get a single quote, specified by its ID
  */

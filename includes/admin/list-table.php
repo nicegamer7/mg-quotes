@@ -1,5 +1,7 @@
 <?php
 
+if (!defined('ABSPATH')) exit;
+
 class mg_qt_ListTable {
 
 	public function __construct() {

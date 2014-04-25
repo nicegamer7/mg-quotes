@@ -15,6 +15,8 @@
 * If the 'value' parameter is not set it will use term ID for categories, and the term's slug for other taxonomies in the value attribute of the term's <option>.
 */
 
+if (!defined('ABSPATH')) exit;
+
 class mg_qt_Walker_TaxonomyDropdown extends Walker_CategoryDropdown {
 
 	function start_el( &$output, $category, $depth = 0, $args = array(), $id = 0 ) {
