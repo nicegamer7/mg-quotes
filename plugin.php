@@ -19,7 +19,7 @@ define('MG_QT_ASSETS', MG_QT_PLUGIN_DIR_URL . 'assets/');
 require_once MG_QT_INCLUDES . 'cpt.php';
 require_once MG_QT_INCLUDES . 'tax.php';
 require_once MG_QT_INCLUDES . 'query.php';
-require_once MG_QT_INCLUDES . 'templating/templating.php';
+require_once MG_QT_INCLUDES . 'quote-template.php';
 require_once MG_QT_INCLUDES . 'template-tags.php';
 require_once MG_QT_INCLUDES . 'shortcodes.php';
 require_once MG_QT_INCLUDES . 'widgets/init.php';
