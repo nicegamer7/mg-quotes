@@ -17,20 +17,28 @@ class mg_qt_Uninstall {
 
 		if (!empty($quotes))
 			foreach ($quotes as $quote)
-				wp_delete_post($item, true);
+				wp_delete_post($quote, true);
 	}
 	
 	private function delete_taxonomies() {
-		global $wp_taxonomies;
-		
-		$taxs = array('mg_qt_category', 'mg_qt_author');
-		foreach ($taxs as $tax) {
-			$terms = get_terms($tax);
-			if ($terms)
-				foreach ($terms as $term)
-					wp_delete_term($term->term_id, $tax);
-			unset($wp_taxonomies[$tax]);
+		$tax_names = array('mg_qt_category', 'mg_qt_author');
+		foreach ($tax_names as $tax_name) {
+			$terms = $this->get_terms($tax_name);
+			foreach ($terms as $term)
+				wp_delete_term($term->term_id, $tax_name);
 		}
+	}
+	
+	private function get_terms($tax_name) {
+		global $wpdb;
+
+		$query = 'SELECT t.name, t.term_id
+			FROM ' . $wpdb->terms . ' AS t
+            INNER JOIN ' . $wpdb->term_taxonomy . ' AS tt
+            ON t.term_id = tt.term_id
+            WHERE tt.taxonomy = "' . $tax_name . '"';
+
+		return $wpdb->get_results($query);
 	}
 
 }
