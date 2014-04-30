@@ -1,11 +1,11 @@
 <?php
 /*
 Plugin Name: mg Quotes
-Plugin URI: 
-Description: 
+Plugin URI: http://mgiulio.info
+Description: Manage and publish your favorite quotes with WordPress
 Version: 1.0
 Author: Giulio 'mgiulio' Mainardi
-Author URI: http://m-giulio.me
+Author URI: http://mgiulio.info
 License: GPL2
 */
 
