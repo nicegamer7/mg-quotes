@@ -2,7 +2,7 @@
 
 if (!defined('ABSPATH')) exit;
 
-class mg_qt_Single_Quote extends WP_Widget {
+class mg_qt_Selected_Quote extends WP_Widget {
 
 	private $factory_settings = array(
 		'title' => '', 
@@ -11,11 +11,11 @@ class mg_qt_Single_Quote extends WP_Widget {
 
 	public function __construct() {
 		parent::__construct(
-			'mg_qt_widget_single_quote',
-			__('Single Quote', 'mg_qt'),
+			'mg_qt_widget_selected_quote',
+			__('Selected Quote', 'mg_qt'),
 			array(
-				'description' => __('Pick a single quote', 'mg_qt'),
-				'classname' => 'mg_qt_widget_single_quote'
+				'description' => __('Pick a selected quote', 'mg_qt'),
+				'classname' => 'mg_qt_widget_selected_quote'
 			) 
 		);
 	}
