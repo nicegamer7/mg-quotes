@@ -4,17 +4,7 @@ Donate link:
 Tags: quotes
 Requires at least: 3.1
 Tested up to: 3.9
-Stable tag: Stable tag should indicate the Subversion "tag" of the latest stable version, or "trunk," if you use `/trunk/` for stable.
-  Note that the `readme.txt` of the stable tag is the one that is considered the defining one for the plugin, so
-if the `/trunk/readme.txt` file says that the stable tag is `4.3`, then it is `/tags/4.3/readme.txt` that'll be used
-for displaying information about the plugin.  In this situation, the only thing considered from the trunk `readme.txt`
-is the stable tag pointer.  Thus, if you develop in trunk, you can update the trunk `readme.txt` to reflect changes in
-your in-development version, without having that information incorrectly disclosed about the current stable version
-that lacks those changes -- as long as the trunk's `readme.txt` points to the correct stable tag.
-
-    If no stable tag is provided, it is assumed that trunk is stable, but you should specify "trunk" if that's where
-you put the stable version, in order to eliminate any doubt.
-
+Stable tag: trunk
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -36,7 +26,7 @@ Quick features summary:
 * Publish quotes on the front end with widgets, shortcodes and template tags
 * Cleanup on uninstall
 
-=== Manage the quotes ===
+**Manage the quotes**
 
 Start managing your quotes accessing the new top menu 'Quotes':
 
@@ -50,15 +40,15 @@ The authors are implemented with a custom taxonomy, so from the Quotes/Authors p
 From the Quotes/All quotes page there is the standard post list table WP user interface to browse through the quotes.
 There is the full text search and two filters for the author and/or the category.
 
-==== Import/Export ====
+*Import/Export*
 
 To copy all the quotes from a WordPress instance to another just use the related tools provided by WordPress, accessible from the Tools menu.
 
-=== Publish the quotes ===
+**Publish the quotes**
 
 Quotes can be published on the front end with three methods: widgets, shortcodes and template tags.
 
-==== Widgets ====
+*Widgets*
 
 The Selected Quote and the Random Quote widgets can be used to to display one single quote in the widget areas provided by the used theme.
 
@@ -66,7 +56,7 @@ The Selected Quote widget allows to display a specific quote. Just select it wit
 
 The random quote displayed by the homonymous widget can be optionally limited to the quotes by an author and/or a category using the provided controls.
 
-==== Shortcodes ====
+*Shortcodes*
 
 Shortcodes can be used to display quotes in posts and pages.
 
@@ -83,7 +73,7 @@ Example:
 [rnd_quote category="Art"] -> a random quote from the 'Art' category
 [rnd_quote category="Art" author="Pablo Picasso"] -> a random quote in the 'Art' category and by the 'Pablo Picasso' author
 
-==== Template tags ====
+*Template tags*
 	
 If you prefer to modify the theme templates, two template tags are available that mimic the behaviour of the widgets and shortcodes.
 
@@ -93,7 +83,7 @@ If you prefer to modify the theme templates, two template tags are available tha
 These two functions return a string with the HTML markup for the picked quote; mg_qt_quote($id) and mg_qt_rnd_quote($category = null, $author = null) 
 instead directly output the markup.
 
-==== Quote markup customization ====
+*Quote markup customization*
 
 By default the markup generated for a quote is something like this:
 
@@ -121,13 +111,13 @@ The standard procedures for WP plugins installation apply:
 
 When the plugin is deleted it will remove all its data from the database.
 
+== Frequently Asked Questions ==
+
+No questions yet.
+
 == Screenshots ==
 
-1. This screen shot description corresponds to screenshot-1.(png|jpg|jpeg|gif). Note that the screenshot is taken from
-the /assets directory or the directory that contains the stable readme.txt (tags or trunk). Screenshots in the /assets 
-directory take precedence. For example, `/assets/screenshot-1.png` would win over `/tags/4.3/screenshot-1.png` 
-(or jpg, jpeg, gif).
-2. This is the second screen shot
+Coming soon.
 
 == Changelog ==
 
