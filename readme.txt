@@ -1,7 +1,7 @@
 === mg Quotes ===
 Contributors: giuliom
 Donate link: 
-Tags: quotes
+Tags: quotes, random quotes
 Requires at least: 3.1
 Tested up to: 3.9
 Stable tag: trunk
