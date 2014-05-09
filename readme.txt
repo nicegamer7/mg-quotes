@@ -117,7 +117,12 @@ No questions yet.
 
 == Screenshots ==
 
-Coming soon.
+1. Admin Menu
+2. List Table
+3. Quote Editor
+4. Author Page
+5. Categories Page
+6. Widgets
 
 == Changelog ==
 
