@@ -27,6 +27,8 @@ Quick features summary:
 * Restrict or allow access to the quotes and the relative operations in admin with fine grained access control 
 * Cleanup on uninstall
 
+For more informations and news please visit the official [project page](http://mgiulio.info/projects/mg-quotes/).
+
 **Manage the quotes**
 
 Start managing your quotes accessing the new top menu 'Quotes':
@@ -176,3 +178,6 @@ No questions yet.
 = 1.1 =
 * Feature: Fine grained access control in admin
 * Feature: Support of quote post author(the WP user that entered the quote)
+
+= 1.1.1 =
+* Bug fix: Fix syntax error for older PHP versions
