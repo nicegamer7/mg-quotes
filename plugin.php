@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: mg Quotes
-Plugin URI: http://mgiulio.info
+Plugin URI: http://mgiulio.info/projects/mg-quotes/
 Description: Manage and publish your favorite quotes with WordPress
 Version: 1.1.2
 Author: Giulio 'mgiulio' Mainardi
