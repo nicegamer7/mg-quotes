@@ -50,7 +50,12 @@ class mg_qt_Shortcodes {
 		/* extract(shortcode_atts(array(
 		), $atts)); */
 		
-		return implode(array_map('mg_qt_markup', mg_qt_Query::get_quotes()));
+		$quotes = mg_qt_Query::get_quotes();
+		
+		return !empty($quotes)?
+			'<div class="mg-qt-quotes">' . implode(array_map('mg_qt_markup', $quotes)) . '</div>' : 
+			''
+		;
 	}
 
 }
