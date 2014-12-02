@@ -7,6 +7,7 @@ class mg_qt_Shortcodes {
 	public function __construct() {
 		add_shortcode('quote', array($this, 'quote'));
 		add_shortcode('rnd_quote', array($this, 'rnd_quote'));
+		add_shortcode('quotes', array($this, 'quotes'));
 	}
 	
 	function quote($atts) {
@@ -43,6 +44,13 @@ class mg_qt_Shortcodes {
 		}
 		
 		return mg_qt_markup($quote);
+	}
+	
+	function quotes($atts) {
+		/* extract(shortcode_atts(array(
+		), $atts)); */
+		
+		return implode(array_map('mg_qt_markup', mg_qt_Query::get_quotes()));
 	}
 
 }

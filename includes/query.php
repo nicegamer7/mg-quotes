@@ -8,18 +8,22 @@ class mg_qt_Query {
 		if (!is_int($id) || $id === 0)
 			return false;
 			
-		return self::single_quote(array(
+		$quotes = self::fetch_quotes(array(
 			'post_type' => 'mg_qt_quote',
 			'p' => $id
 		));
+		
+		return !empty($quotes) ? $quotes[0] : array();
 	}
 	
 	public static function rnd_quote() {
-		return self::single_quote(array(
+		$quotes =  self::fetch_quotes(array(
 			'post_type' => 'mg_qt_quote',
 			'orderby' => 'rand',
 			'posts_per_page' => 1
 		));
+		
+		return !empty($quotes) ? $quotes[0] : array();
 	}
 	
 	/*
@@ -45,12 +49,14 @@ class mg_qt_Query {
 	}
 	
 	public static function rnd_quote_from_category_slug($slug) {
-		return self::single_quote(array(
+		$quotes =  self::fetch_quotes(array(
 			'post_type' => 'mg_qt_quote',
 			'orderby' => 'rand',
 			'posts_per_page' => 1,
 			'mg_qt_category' => $slug
 		));
+		
+		return !empty($quotes) ? $quotes[0] : array();
 	}
 	
 	public static function rnd_quote_from_author_name($name) {
@@ -72,16 +78,18 @@ class mg_qt_Query {
 	}
 	
 	public static function rnd_quote_from_author_slug($slug) {
-		return self::single_quote(array(
+		$quotes =  self::fetch_quotes(array(
 			'post_type' => 'mg_qt_quote',
 			'orderby' => 'rand',
 			'posts_per_page' => 1,
 			'mg_qt_author' => $slug
 		));
+		
+		return !empty($quotes) ? $quotes[0] : array();
 	}
 	
 	public static function rnd_quote_from_cat_and_author($category, $author) {
-		return self::single_quote(array(
+		$quotes = self::fetch_quotes(array(
 			'post_type' => 'mg_qt_quote',
 			'orderby' => 'rand',
 			'posts_per_page' => 1,
@@ -102,6 +110,15 @@ class mg_qt_Query {
 					'operator' => 'IN'
 				)
 			)
+		));
+		
+		return !empty($quotes) ? $quotes[0] : array();
+	}
+	
+	public static function get_quotes() {
+		return self::fetch_quotes(array(
+			'post_type' => 'mg_qt_quote',
+			'posts_per_page' => -1
 		));
 	}
 	
@@ -168,32 +185,26 @@ class mg_qt_Query {
 		return term_exists($id, 'mg_qt_author') !== 0;
 	}
 	
-	/*
-	 * Execute a single quote query.
-	 * Returns an associative array with the quote fields.
-	 * If the quote is not found returns false.
-	 */
-	private static function single_quote($args) {
+	private static function fetch_quotes($args) {
 		$query = new WP_Query($args);
 		
-		if (!$query->have_posts())
-			return false;
+		$quotes = array();
+		
+		while ($query->have_posts()) {
+			$quote = array();
+			$query->the_post();
 			
-		$quote = array();
+			$quote['content'] = get_the_content();
+			$quote['title'] = get_the_title();
+			$post_id = get_the_ID();
+			$quote['id'] = $post_id;
+			$quote['author'] = self::quote_author_name($post_id);
 			
-		$query->the_post();
-		
-		$quote['content'] = get_the_content();
-		$quote['title'] = get_the_title();
-		
-		$post_id = get_the_ID();
-		$quote['id'] = $post_id;
-		
-		$quote['author'] = self::quote_author_name($post_id);
-		
+			$quotes[] = $quote;
+		}
 		wp_reset_postdata();
 		
-		return $quote;
+		return $quotes;
 	}
 	
 }
