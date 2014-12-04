@@ -52,10 +52,13 @@ class mg_qt_Shortcodes {
 		
 		$quotes = mg_qt_Query::get_quotes();
 		
-		return !empty($quotes)?
-			'<div class="mg-qt-quotes">' . implode(array_map('mg_qt_markup', $quotes)) . '</div>' : 
-			''
-		;
+		if (empty($quotes))
+			return '';
+			
+		$wrapper_begin = apply_filter('mg_qt_quotes_begin', '<div class="mg-qt-quotes">');
+		$wrapper_end = apply_filter('mg_qt_quotes_end', '</div>');
+		
+		return $wrapper_begin . implode(array_map('mg_qt_markup', $quotes)) . $wrapper_end; 
 	}
 
 }
