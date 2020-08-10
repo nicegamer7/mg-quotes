@@ -67,7 +67,6 @@ class mg_qt_Uninstall {
 			'edit_others_quotes',
 			'publish_quotes',
 			'read_private_quotes',
-			'read',
 			'delete_quotes',
 			'delete_private_quotes',
 			'delete_published_quotes',
